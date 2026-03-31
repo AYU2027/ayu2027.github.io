@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ site.title }}</title>
+    <style>
+        body { max-width: 600px; margin: 40px auto; padding: 0 20px; font-family: sans-serif; line-height: 1.6; }
+        .post { margin-bottom: 40px; padding-bottom: 20px; border-bottom: 1px solid #eee; }
+        .date { color: #888; font-size: 0.9em; margin-bottom: 10px; display: block; }
+    </style>
+</head>
+<body>
+    <h1>{{ site.title }}</h1>
+    <p>{{ site.description }}</p>
+    <hr>
+    {{ content }}
+</body>
+</html>
