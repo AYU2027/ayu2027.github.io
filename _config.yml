@@ -1,7 +1,10 @@
 title: "My blog  "
 description: "this where you know about me"
+
+url: "https://ayu2027.github.io"
+baseurl: ""
+
 remote_theme: bencentra/centrarium
 plugins:
   - jekyll-remote-theme
-
 
