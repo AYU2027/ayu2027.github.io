@@ -2,18 +2,13 @@
 layout: default
 ---
 
-<div class="posts">
-  {% for post in site.posts %}
-    <article class="post">
-      <h2 class="post-title">
-        <a href="{{ post.url | relative_url }}">{{ post.title | default: "Daily Update" }}</a>
-      </h2>
-      <time datetime="{{ post.date | date_to_xmlschema }}" class="post-date">
-        {{ post.date | date: "%B %d, %Y" }}
-      </time>
-      <div class="post-content">
-        {{ post.content }}
-      </div>
-    </article>
-  {% endfor %}
-</div>
+{% for post in site.posts %}
+  <article class="feed-item">
+    <time class="feed-date" datetime="{{ post.date | date_to_xmlschema }}">
+      {{ post.date | date: "%B %d, %Y" }}
+    </time>
+    <div class="feed-content">
+      {{ post.content }}
+    </div>
+  </article>
+{% endfor %}
