@@ -12,12 +12,15 @@
             --text-main: #111827;
             --text-muted: #6b7280;
             --border: #e5e7eb;
-            --card-bg: rgba(255, 255, 255, 0.85); /* Slightly transparent for background bleed */
+            --card-bg: rgba(255, 255, 255, 0.85);
             --accent: #2563eb; 
             --accent-glow: #3b82f6;
         }
+
+        html {
+            scroll-behavior: smooth;
+        }
         
-        /* --- ANIMATED BREATHING BACKGROUND --- */
         @keyframes gradientBG {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
@@ -26,7 +29,6 @@
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            /* The animated background setup */
             background: linear-gradient(-45deg, var(--bg-1), var(--bg-2), var(--bg-3), var(--bg-1));
             background-size: 400% 400%;
             animation: gradientBG 15s ease infinite;
@@ -34,8 +36,28 @@
             line-height: 1.7;
             margin: 0;
             padding: 0;
-            -webkit-font-smoothing: antialiased;
-            min-height: 100vh;
+        }
+
+        /* TIMELINE SIDEBAR */
+        .timeline-sidebar {
+            position: fixed;
+            top: 50%;
+            left: 24px;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .timeline-sidebar a {
+            text-decoration: none;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            transition: color 0.2s ease;
+        }
+
+        .timeline-sidebar a:hover {
+            color: var(--accent);
         }
         
         .container {
@@ -44,41 +66,16 @@
             padding: 50px 20px;
         }
 
-        /* --- ENTRY ANIMATIONS --- */
-        @keyframes fadeDown {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        /* --- HEADER & TITLE ANIMATION --- */
         header {
             margin-bottom: 3rem;
             padding-bottom: 2rem;
             border-bottom: 1px solid var(--border);
-            animation: fadeDown 0.8s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
         }
         
         header h1 {
             font-size: 2.2rem;
             font-weight: 800;
             margin: 0 0 8px 0;
-            letter-spacing: -0.03em;
-            display: inline-block;
-            transition: all 0.4s ease;
-            cursor: default;
-        }
-
-        /* Hover effect that fills the title with a blue gradient */
-        header h1:hover {
-            background: linear-gradient(to right, var(--accent), var(--accent-glow));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            transform: scale(1.02);
         }
         
         header p {
@@ -87,91 +84,32 @@
             font-size: 1.15rem;
         }
 
-        main {
-            opacity: 0;
-            animation: slideUp 0.8s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
-            animation-delay: 0.1s;
-        }
-        
-        /* --- CARD ANIMATIONS --- */
         .feed-item {
             background: var(--card-bg);
-            backdrop-filter: blur(10px); /* Adds a frosted glass effect */
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(229, 231, 235, 0.5);
+            backdrop-filter: blur(10px);
             border-radius: 12px;
             padding: 32px;
             margin-bottom: 28px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-            position: relative;
-            overflow: hidden;
-            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
         }
 
-        .feed-item::before {
-            content: "";
-            position: absolute;
-            top: 0; left: 0; bottom: 0; width: 4px;
-            background: var(--accent);
-            transform: scaleY(0);
-            transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-            transform-origin: bottom;
-        }
-
-        .feed-item:hover {
-            transform: translateY(-6px) scale(1.01);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-            border-color: #d1d5db;
-            background: #ffffff;
-        }
-
-        .feed-item:hover::before {
-            transform: scaleY(1);
-        }
-        
         .feed-date {
             font-size: 0.85rem;
             text-transform: uppercase;
-            letter-spacing: 0.08em;
-            font-weight: 600;
             color: var(--accent);
             margin-bottom: 16px;
-            display: block;
-        }
-        
-        .feed-content p {
-            margin: 0 0 16px 0;
-            font-size: 1.05rem;
-        }
-        
-        .feed-content p:last-child {
-            margin-bottom: 0;
-        }
-        
-        /* --- FOOTER ANIMATION --- */
-        footer {
-            margin-top: 4rem;
-            text-align: center;
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            opacity: 0;
-            animation: slideUp 0.8s ease forwards;
-            animation-delay: 0.3s;
-            transition: all 0.3s ease;
-            padding: 20px;
-            border-radius: 8px;
-            cursor: pointer;
-        }
-
-        /* Subtle glowing lift on the footer */
-        footer:hover {
-            color: var(--accent);
-            background: rgba(37, 99, 235, 0.05);
-            transform: translateY(-2px);
         }
     </style>
 </head>
 <body>
+
+    <!-- TIMELINE SIDEBAR -->
+    <div class="timeline-sidebar">
+        <a href="#section1">Intro</a>
+        <a href="#section2">Journey</a>
+        <a href="#section3">Projects</a>
+        <a href="#section4">Achievements</a>
+    </div>
+
     <div class="container">
         <header>
             <h1>{{ site.title }}</h1>
@@ -179,12 +117,31 @@
         </header>
         
         <main>
-            {{ content }}
+            <div id="section1" class="feed-item">
+                <span class="feed-date">Intro</span>
+                <p>Content here</p>
+            </div>
+
+            <div id="section2" class="feed-item">
+                <span class="feed-date">Journey</span>
+                <p>Content here</p>
+            </div>
+
+            <div id="section3" class="feed-item">
+                <span class="feed-date">Projects</span>
+                <p>Content here</p>
+            </div>
+
+            <div id="section4" class="feed-item">
+                <span class="feed-date">Achievements</span>
+                <p>Content here</p>
+            </div>
         </main>
         
         <footer>
             &copy; 2026 Ayush Sinha.
         </footer>
     </div>
+
 </body>
 </html>
